@@ -20,6 +20,7 @@ namespace coursework
 
         string Password;
         bool SuperUser;
+        int[] date = new int[3];
 
         public string Password1 { get => Password; set => Password = value; }
 
@@ -57,12 +58,14 @@ namespace coursework
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            int[] date = new int[3] { Convert.ToInt32(DayUpDown.Value), Convert.ToInt32(MonthUpDown.Value), Convert.ToInt32(YearUpDown.Value) };
+            date[0] = Convert.ToInt32(DayUpDown.Value);
+            date[1] = Convert.ToInt32(MonthUpDown.Value);
+            date[2] = Convert.ToInt32(YearUpDown.Value);
             Drugstore drugstore = new Drugstore(Convert.ToString(NameBox.Text), Convert.ToString(ManufactBox.Text), Convert.ToDouble(PriceUpDown.Value), Convert.ToInt32(AmountUpDown.Value), Convert.ToInt32(DrugUpDown.Value), date);
             if (drugstore.check())
             {
                 //Adding Object to PreView
-                DBPreView.Rows.Add(drugstore.Name,drugstore.Manufact,drugstore.Price,drugstore.Amount, drugstore.DrugNumb,drugstore.ExpDate[0]+"."+ drugstore.ExpDate[0] + "."+drugstore.ExpDate[0]);
+                DBPreView.Rows.Add(drugstore.Name,drugstore.Manufact,drugstore.Price,drugstore.Amount, drugstore.DrugNumb,drugstore.ExpDate[0]+"."+ drugstore.ExpDate[1] + "."+drugstore.ExpDate[2]);
                 //All Input elements colors to default
                 NameBox.BackColor = System.Drawing.Color.White;
                 NameBox.ForeColor = System.Drawing.Color.Black;
@@ -232,7 +235,7 @@ namespace coursework
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ShowAllButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < DBPreView.Rows.Count; i++)
             {
@@ -244,10 +247,22 @@ namespace coursework
         {
             for (int i = 0; i < DBPreView.Rows.Count; i++)
             {
-                //if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) != /*Date*/)
+
+                date = Convert.ToString(DBPreView.Rows[i].Cells[4].Value).Split('.').Select(Int32.Parse).ToArray();
+                //if (date[0]+ date[1]*31+date[2]*365 > System.DateTime.Now.Day + System.DateTime.Now.Month * 31 + System.DateTime.Now.Year * 365)
                 //{
                 //    DBPreView.Rows[i].Visible = false;
                 //}
+            }
+        }
+
+        private void ShowMinButton_Click(object sender, EventArgs e)
+        {
+            int minprice = Convert.ToInt32(InputBox.Show("Please input Minimal price"));
+            for(int i =0; i<DBPreView.RowCount; i++)
+            if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) <= minprice)
+            {
+                DBPreView.Rows[i].Visible = false;
             }
         }
     }

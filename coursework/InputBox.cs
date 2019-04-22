@@ -125,7 +125,7 @@ namespace coursework
             this.ExitButton.TabIndex = 2;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
-            this.ExitButton.Click += new System.EventHandler(this.SubmitButton_Click_1);
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton1_Click);
             // 
             // SearchUpDown1
             // 

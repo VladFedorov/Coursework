@@ -60,7 +60,7 @@ namespace coursework
                 error = 5;
                 return false;
             }
-            if (ExpDate[2] <1990 || ExpDate[2] > 2019)
+            if (ExpDate[2] <1919)
             {
                 error = 6;
                 return false;
