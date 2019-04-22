@@ -22,8 +22,6 @@ namespace coursework
         bool SuperUser;
         int[] date = new int[3];
 
-        public string Password1 { get => Password; set => Password = value; }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //TOOLTIP
@@ -52,6 +50,10 @@ namespace coursework
                     DBPreView.ReadOnly = false;
                     SuperUser = true;
                     ConsoleBox.Text = "Succes!\n"+"Now you SuperUser! SuperUser can edit and remove rows!";
+                }
+                else
+                {
+                    ConsoleBox.Text = "Invalid password!";
                 }
             }
         }
@@ -218,8 +220,7 @@ namespace coursework
                 }
                 //Deleting falt object
                 drugstore = null;
-
-                ConsoleBox.Text = "It seens you have a mistake\nYou must to cooret red box!";
+                ConsoleBox.Text = "It seens you have a mistake\nYou must to coret red box!";
             }
         }
 
@@ -232,6 +233,7 @@ namespace coursework
                 {
                     DBPreView.Rows[i].Visible = false;
                 }
+                ConsoleBox.Text = "Now you can see medicine  ONLY in current drugstore!\nToo see ALL medicine press " + '"' + "Show All" + '"' + "button.";
             }
         }
 
@@ -241,29 +243,37 @@ namespace coursework
             {
              DBPreView.Rows[i].Visible = true;  
             }
+            ConsoleBox.Text = "Now you can see ALL medicine in DB";
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DBPreView.Rows.Count; i++)
+            for (int j = 0; j < DBPreView.Rows.Count; j++)
             {
-
-                date = Convert.ToString(DBPreView.Rows[i].Cells[4].Value).Split('.').Select(Int32.Parse).ToArray();
-                //if (date[0]+ date[1]*31+date[2]*365 > System.DateTime.Now.Day + System.DateTime.Now.Month * 31 + System.DateTime.Now.Year * 365)
-                //{
-                //    DBPreView.Rows[i].Visible = false;
-                //}
+                for (int i = 0; i < DBPreView.Rows.Count; i++)
+                {
+                    date = DBPreView.Rows[i].Cells[5].Value.ToString().Split('.').Select(n => Convert.ToInt32(n)).ToArray();
+                    if (date[0] + date[1] * 31 + date[2] * 365 < System.DateTime.Now.Day + System.DateTime.Now.Month * 31 + System.DateTime.Now.Year * 365)
+                    {
+                        DBPreView.Rows.RemoveAt(i);
+                    }
+                }
             }
+            DBPreView.Rows.RemoveAt(0
+);
+            DBPreView.Refresh();
+            ConsoleBox.Text = "All expired medecine has been deleted!";
         }
 
         private void ShowMinButton_Click(object sender, EventArgs e)
         {
-            int minprice = Convert.ToInt32(InputBox.Show("Please input Minimal price"));
+            int minprice = Convert.ToInt32(InputBox.Show("Please input MINIMAL price"));
             for(int i =0; i<DBPreView.RowCount; i++)
             if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) <= minprice)
             {
-                DBPreView.Rows[i].Visible = false;
+               DBPreView.Rows[i].Visible = false;
             }
+            ConsoleBox.Text = "Now you can see ONLY objects whitch price bigger or equal " + minprice + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
         }
     }
 }
