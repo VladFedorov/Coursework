@@ -80,7 +80,7 @@
             this.ImportButton.Location = new System.Drawing.Point(10, 268);
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size(51, 23);
-            this.ImportButton.TabIndex = 0;
+            this.ImportButton.TabIndex = 13;
             this.ImportButton.Text = "Import";
             this.ImportButton.UseVisualStyleBackColor = true;
             // 
@@ -89,7 +89,7 @@
             this.NameBox.Location = new System.Drawing.Point(77, 34);
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(100, 20);
-            this.NameBox.TabIndex = 1;
+            this.NameBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -97,7 +97,7 @@
             this.label1.Location = new System.Drawing.Point(61, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Data Inut";
             // 
             // label2
@@ -106,7 +106,7 @@
             this.label2.Location = new System.Drawing.Point(9, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Name";
             // 
             // ManufactBox
@@ -122,7 +122,7 @@
             this.label3.Location = new System.Drawing.Point(9, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Manufact";
             // 
             // label4
@@ -131,7 +131,7 @@
             this.label4.Location = new System.Drawing.Point(9, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 2;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Price";
             // 
             // label5
@@ -140,7 +140,7 @@
             this.label5.Location = new System.Drawing.Point(9, 152);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 2;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Amount";
             // 
             // label6
@@ -149,7 +149,7 @@
             this.label6.Location = new System.Drawing.Point(9, 191);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
-            this.label6.TabIndex = 2;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Drugstore";
             // 
             // label7
@@ -158,7 +158,7 @@
             this.label7.Location = new System.Drawing.Point(9, 237);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 2;
+            this.label7.TabIndex = 0;
             this.label7.Text = "Exp. date";
             // 
             // DBPreView
@@ -177,7 +177,7 @@
             this.DBPreView.Name = "DBPreView";
             this.DBPreView.ReadOnly = true;
             this.DBPreView.Size = new System.Drawing.Size(580, 257);
-            this.DBPreView.TabIndex = 3;
+            this.DBPreView.TabIndex = 15;
             this.DBPreView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DBPreView_CellClick);
             // 
             // NamePrev
@@ -226,7 +226,7 @@
             this.ConsoleBox.Name = "ConsoleBox";
             this.ConsoleBox.ReadOnly = true;
             this.ConsoleBox.Size = new System.Drawing.Size(661, 106);
-            this.ConsoleBox.TabIndex = 4;
+            this.ConsoleBox.TabIndex = 16;
             this.ConsoleBox.Text = "";
             // 
             // label8
@@ -235,7 +235,7 @@
             this.label8.Location = new System.Drawing.Point(12, 304);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 13);
-            this.label8.TabIndex = 2;
+            this.label8.TabIndex = 0;
             this.label8.Text = "Console";
             // 
             // label9
@@ -244,7 +244,7 @@
             this.label9.Location = new System.Drawing.Point(458, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(95, 13);
-            this.label9.TabIndex = 2;
+            this.label9.TabIndex = 0;
             this.label9.Text = "DataBase Preview";
             // 
             // AddButton
@@ -252,7 +252,7 @@
             this.AddButton.Location = new System.Drawing.Point(77, 268);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(51, 23);
-            this.AddButton.TabIndex = 0;
+            this.AddButton.TabIndex = 8;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
@@ -262,7 +262,7 @@
             this.ExportButton.Location = new System.Drawing.Point(141, 268);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(51, 23);
-            this.ExportButton.TabIndex = 0;
+            this.ExportButton.TabIndex = 14;
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
             // 
@@ -271,7 +271,7 @@
             this.AmountUpDown.Location = new System.Drawing.Point(77, 145);
             this.AmountUpDown.Name = "AmountUpDown";
             this.AmountUpDown.Size = new System.Drawing.Size(100, 20);
-            this.AmountUpDown.TabIndex = 5;
+            this.AmountUpDown.TabIndex = 3;
             // 
             // DrugUpDown
             // 
@@ -283,7 +283,7 @@
             0});
             this.DrugUpDown.Name = "DrugUpDown";
             this.DrugUpDown.Size = new System.Drawing.Size(100, 20);
-            this.DrugUpDown.TabIndex = 5;
+            this.DrugUpDown.TabIndex = 4;
             this.DrugUpDown.Value = new decimal(new int[] {
             1,
             0,
@@ -296,7 +296,7 @@
             this.label10.Location = new System.Drawing.Point(686, 304);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 13);
-            this.label10.TabIndex = 2;
+            this.label10.TabIndex = 0;
             this.label10.Text = "Additional Functions";
             // 
             // ClearButton
@@ -304,7 +304,7 @@
             this.ClearButton.Location = new System.Drawing.Point(708, 359);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(68, 23);
-            this.ClearButton.TabIndex = 0;
+            this.ClearButton.TabIndex = 10;
             this.ClearButton.Tag = "";
             this.ClearButton.Text = "Clear Dead";
             this.ClearButton.UseVisualStyleBackColor = true;
@@ -333,7 +333,7 @@
             this.ShowMinButton.Location = new System.Drawing.Point(708, 330);
             this.ShowMinButton.Name = "ShowMinButton";
             this.ShowMinButton.Size = new System.Drawing.Size(68, 23);
-            this.ShowMinButton.TabIndex = 0;
+            this.ShowMinButton.TabIndex = 9;
             this.ShowMinButton.Text = "Show Min";
             this.ShowMinButton.UseVisualStyleBackColor = true;
             this.ShowMinButton.Click += new System.EventHandler(this.ShowMinButton_Click);
@@ -343,7 +343,7 @@
             this.SearchButton.Location = new System.Drawing.Point(708, 388);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(68, 23);
-            this.SearchButton.TabIndex = 0;
+            this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
@@ -375,7 +375,7 @@
             0});
             this.MonthUpDown.Name = "MonthUpDown";
             this.MonthUpDown.Size = new System.Drawing.Size(35, 20);
-            this.MonthUpDown.TabIndex = 5;
+            this.MonthUpDown.TabIndex = 6;
             this.MonthUpDown.Value = new decimal(new int[] {
             1,
             0,
@@ -397,7 +397,7 @@
             0});
             this.YearUpDown.Name = "YearUpDown";
             this.YearUpDown.Size = new System.Drawing.Size(43, 20);
-            this.YearUpDown.TabIndex = 5;
+            this.YearUpDown.TabIndex = 7;
             this.YearUpDown.Value = new decimal(new int[] {
             1990,
             0,
@@ -442,7 +442,7 @@
             this.PriceUpDown.Location = new System.Drawing.Point(77, 108);
             this.PriceUpDown.Name = "PriceUpDown";
             this.PriceUpDown.Size = new System.Drawing.Size(100, 20);
-            this.PriceUpDown.TabIndex = 5;
+            this.PriceUpDown.TabIndex = 2;
             this.PriceUpDown.ThousandsSeparator = true;
             this.PriceUpDown.Value = new decimal(new int[] {
             1,
@@ -455,7 +455,7 @@
             this.ShowAllButton.Location = new System.Drawing.Point(708, 417);
             this.ShowAllButton.Name = "ShowAllButton";
             this.ShowAllButton.Size = new System.Drawing.Size(68, 23);
-            this.ShowAllButton.TabIndex = 6;
+            this.ShowAllButton.TabIndex = 12;
             this.ShowAllButton.Text = "Show All";
             this.ShowAllButton.UseVisualStyleBackColor = true;
             this.ShowAllButton.Click += new System.EventHandler(this.ShowAllButton_Click);

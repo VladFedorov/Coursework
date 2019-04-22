@@ -259,10 +259,11 @@ namespace coursework
                     }
                 }
             }
-            DBPreView.Rows.RemoveAt(0
-);
+            date = DBPreView.Rows[0].Cells[5].Value.ToString().Split('.').Select(n => Convert.ToInt32(n)).ToArray();
+            if (DBPreView.RowCount !=0 && date[0] + date[1] * 31 + date[2] * 365 < System.DateTime.Now.Day + System.DateTime.Now.Month * 31 + System.DateTime.Now.Year * 365)
+            DBPreView.Rows.RemoveAt(0);
             DBPreView.Refresh();
-            ConsoleBox.Text = "All expired medecine has been deleted!";
+            ConsoleBox.Text = "All expired medicine has been deleted!";
         }
 
         private void ShowMinButton_Click(object sender, EventArgs e)

@@ -100,10 +100,10 @@ namespace coursework
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
             // 
-            // textBox1
+            // SearchBox
             // 
             this.SearchBox.Location = new System.Drawing.Point(23, 25);
-            this.SearchBox.Name = "textBox1";
+            this.SearchBox.Name = "SearchBox";
             this.SearchBox.Size = new System.Drawing.Size(185, 20);
             this.SearchBox.TabIndex = 1;
             // 
@@ -122,7 +122,7 @@ namespace coursework
             this.ExitButton.Location = new System.Drawing.Point(133, 51);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(75, 23);
-            this.ExitButton.TabIndex = 2;
+            this.ExitButton.TabIndex = 3;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton1_Click);
