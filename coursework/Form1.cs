@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Data.OleDb;
 
 namespace coursework
 {
@@ -275,6 +277,81 @@ namespace coursework
                DBPreView.Rows[i].Visible = false;
             }
             ConsoleBox.Text = "Now you can see ONLY objects whitch price bigger or equal " + minprice + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.Visible = true;
+                Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+                Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+                int StartCol = 1;
+                int StartRow = 1;
+                int j = 0, i = 0;
+
+                //Write Headers
+                for (j = 0; j < DBPreView.Columns.Count; j++)
+                {
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[StartRow, StartCol + j];
+                    myRange.Value2 = DBPreView.Columns[j].HeaderText;
+                }
+
+                StartRow++;
+
+                //Write datagridview content
+                for (i = 0; i < DBPreView.Rows.Count; i++)
+                {
+                    for (j = 0; j < DBPreView.Columns.Count; j++)
+                    {
+                        try
+                        {
+                            Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[StartRow + i, StartCol + j];
+                            myRange.Value2 = DBPreView[j, i].Value == null ? "" : DBPreView[j, i].Value;
+                        }
+                        catch
+                        {
+                            ;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < DBPreView.Rows.Count; i++)
+            {
+                DBPreView.Rows.RemoveAt(i);
+            }
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.Filter = "Excel (*.XLS)|*.XLS |Excel (*.XLSX)|*.XLSX";
+            opf.ShowDialog();
+            DataTable tb = new DataTable();
+            //System.Data.DataTable tb = new System.Data.DataTable();
+            string filename = opf.FileName;
+
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook ExcelWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
+
+            ExcelWorkBook = ExcelApp.Workbooks.Open(filename, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false,
+                false, 0, true, 1, 0);
+            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+            for (int i = 2; i <= ExcelApp.Rows.Count; i++)
+            {
+                if (ExcelApp.Cells[i, 1].Value != null)
+                    DBPreView.Rows.Add(ExcelApp.Cells[i, 1].Value, ExcelApp.Cells[i, 2].Value, ExcelApp.Cells[i, 3].Value, ExcelApp.Cells[i, 4].Value, ExcelApp.Cells[i, 5].Value, ExcelApp.Cells[i, 6].Value, ExcelApp.Cells[i, 7].Value, ExcelApp.Cells[i, 8].Value);
+
+                else
+                break;
+            }
+            ConsoleBox.Text = "Data importing finished succesful\n Now in DBPreView you can see data from" + filename;
         }
     }
 }

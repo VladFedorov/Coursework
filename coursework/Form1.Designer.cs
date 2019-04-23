@@ -83,6 +83,7 @@
             this.ImportButton.TabIndex = 13;
             this.ImportButton.Text = "Import";
             this.ImportButton.UseVisualStyleBackColor = true;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // NameBox
             // 
@@ -265,6 +266,7 @@
             this.ExportButton.TabIndex = 14;
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // AmountUpDown
             // 
