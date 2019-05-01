@@ -18,6 +18,7 @@ namespace coursework
 
         public InputBox()
         {
+            returnString = "";
             InitializeComponent();
             ToolTip t = new ToolTip();
             t.SetToolTip(SubmitButton, "Submit password");
@@ -38,11 +39,16 @@ namespace coursework
             return returnString;
         }
 
-        public static string Show(string inputBoxText)
+        public static string Show(string inputBoxText, bool fraction)
         {
             newInputBox = new InputBox();
             newInputBox.SearchBox.Visible = false;
             newInputBox.SearchBox.Enabled = false;
+            if (fraction == false)
+            {
+                newInputBox.SearchUpDown1.Increment = 1;
+                newInputBox.SearchUpDown1.DecimalPlaces = 0;
+            }
             newInputBox.label1.Text = inputBoxText;
             newInputBox.ShowDialog();
             return returnString;
@@ -129,12 +135,13 @@ namespace coursework
             // 
             // SearchUpDown1
             // 
-            this.SearchUpDown1.Location = new System.Drawing.Point(23, 25);
-            this.SearchUpDown1.Minimum = new decimal(new int[] {
+            this.SearchUpDown1.DecimalPlaces = 1;
+            this.SearchUpDown1.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            0});
+            65536});
+            this.SearchUpDown1.Location = new System.Drawing.Point(23, 25);
             this.SearchUpDown1.Name = "SearchUpDown1";
             this.SearchUpDown1.Size = new System.Drawing.Size(185, 20);
             this.SearchUpDown1.TabIndex = 3;
@@ -155,15 +162,9 @@ namespace coursework
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InputBox";
-            this.Load += new System.EventHandler(this.InputBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SearchUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-        }
-
-        private void InputBox_Load(object sender, EventArgs e)
-        {
 
         }
     }

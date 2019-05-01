@@ -222,20 +222,21 @@ namespace coursework
                 }
                 //Deleting falt object
                 drugstore = null;
-                ConsoleBox.Text = "It seens you have a mistake\nYou must to coret red box!";
+                ConsoleBox.Text = "It seems you have a mistake\nYou must to coret red box!";
             }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            int searchnumb = Convert.ToInt32(InputBox.Show("Please input number of drugstore"));
+            bool fraction = false;
+            int searchnumb = Convert.ToInt32(InputBox.Show("Please input number of drugstore",fraction));
             for (int i = 0; i<DBPreView.Rows.Count; i++)
             {
                 if(Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) != searchnumb)
                 {
                     DBPreView.Rows[i].Visible = false;
                 }
-                ConsoleBox.Text = "Now you can see medicine  ONLY in current drugstore!\nToo see ALL medicine press " + '"' + "Show All" + '"' + "button.";
+                ConsoleBox.Text = "Now you can see medicine  ONLY in current drugstore!"+'('+searchnumb+')'+"\nToo see ALL medicine press " + '"' + "Show All" + '"' + "button.";
             }
         }
 
@@ -270,56 +271,49 @@ namespace coursework
 
         private void ShowMinButton_Click(object sender, EventArgs e)
         {
-            int minprice = Convert.ToInt32(InputBox.Show("Please input MINIMAL price"));
-            for(int i =0; i<DBPreView.RowCount; i++)
-            if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) <= minprice)
+            bool fraction = true;
+            double minprice = Convert.ToDouble(InputBox.Show("Please input MINIMAL price",fraction));
+            for (int i = 0; i < DBPreView.RowCount; i++)
             {
-               DBPreView.Rows[i].Visible = false;
+                double nowprice = Convert.ToDouble(DBPreView.Rows[i].Cells[2].Value.ToString());
+                if (nowprice < minprice)
+                {
+                  DBPreView.Rows[i].Visible = false;
+                }
+                       ConsoleBox.Text = "Now you can see ONLY objects whitch price bigger or equal " + minprice + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
             }
-            ConsoleBox.Text = "Now you can see ONLY objects whitch price bigger or equal " + minprice + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            try
+            Excel.Application excelapp = new Excel.Application();
+            Excel.Workbook workbook = excelapp.Workbooks.Add();
+            Excel.Worksheet worksheet = workbook.ActiveSheet;
+            excelapp.Visible = false;
+
+            for (int i = 0; i < DBPreView.RowCount; i++)
             {
-                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
-                excel.Visible = true;
-                Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
-                Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
-                int StartCol = 1;
-                int StartRow = 1;
-                int j = 0, i = 0;
-
-                //Write Headers
-                for (j = 0; j < DBPreView.Columns.Count; j++)
+                for (int j = 0; j < DBPreView.ColumnCount; j++)
                 {
-                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[StartRow, StartCol + j];
-                    myRange.Value2 = DBPreView.Columns[j].HeaderText;
-                }
-
-                StartRow++;
-
-                //Write datagridview content
-                for (i = 0; i < DBPreView.Rows.Count; i++)
-                {
-                    for (j = 0; j < DBPreView.Columns.Count; j++)
-                    {
-                        try
-                        {
-                            Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[StartRow + i, StartCol + j];
-                            myRange.Value2 = DBPreView[j, i].Value == null ? "" : DBPreView[j, i].Value;
-                        }
-                        catch
-                        {
-                            ;
-                        }
-                    }
+                    worksheet.Rows[i+1].Columns[j+1] = DBPreView.Rows[i].Cells[j].Value;
                 }
             }
-            catch (Exception ex)
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Excel (*.XLSX)|*.XLSX | Excel (*.XLS)|*.XLS";
+            string path =null;
+            saveDialog.ShowDialog();
+            path = saveDialog.FileName;
+            if(path == "")
             {
-                MessageBox.Show(ex.ToString());
+                ConsoleBox.Text = "You MUST to choose name and path of file to create it!";
+                excelapp.Quit();
+            }
+            else
+            {
+                ConsoleBox.Text = "File succesfully saved to " + path;
+                excelapp.AlertBeforeOverwriting = false;
+                workbook.SaveAs(path);
+                excelapp.Quit();
             }
         }
 
@@ -330,28 +324,38 @@ namespace coursework
                 DBPreView.Rows.RemoveAt(i);
             }
             OpenFileDialog opf = new OpenFileDialog();
-            opf.Filter = "Excel (*.XLS)|*.XLS |Excel (*.XLSX)|*.XLSX";
-            opf.ShowDialog();
-            DataTable tb = new DataTable();
-            //System.Data.DataTable tb = new System.Data.DataTable();
-            string filename = opf.FileName;
-
-            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel._Workbook ExcelWorkBook;
-            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
-
-            ExcelWorkBook = ExcelApp.Workbooks.Open(filename, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false,
-                false, 0, true, 1, 0);
-            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
-            for (int i = 2; i <= ExcelApp.Rows.Count; i++)
+            opf.Filter = "Excel (*.XLSX)|*.XLSX | OLD_Excel (*.XLS)|*.XLS ";
+            if(opf.ShowDialog() == DialogResult.OK)
             {
-                if (ExcelApp.Cells[i, 1].Value != null)
-                    DBPreView.Rows.Add(ExcelApp.Cells[i, 1].Value, ExcelApp.Cells[i, 2].Value, ExcelApp.Cells[i, 3].Value, ExcelApp.Cells[i, 4].Value, ExcelApp.Cells[i, 5].Value, ExcelApp.Cells[i, 6].Value, ExcelApp.Cells[i, 7].Value, ExcelApp.Cells[i, 8].Value);
+                DataTable tb = new DataTable();
+                string filename = opf.FileName;
+                Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook ExcelWorkBook;
+                Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
 
-                else
-                break;
+                ExcelWorkBook = ExcelApp.Workbooks.Open(filename, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false,
+                    false, 0, true, 1, 0);
+                ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+                for (int i = 1; i <= ExcelApp.Rows.Count; i++)
+                {
+                    if (ExcelApp.Cells[i, 1].Value != null)
+                    {
+                        DBPreView.Rows.Add(ExcelApp.Cells[i, 1].Value, ExcelApp.Cells[i, 2].Value, ExcelApp.Cells[i, 3].Value, ExcelApp.Cells[i, 4].Value, ExcelApp.Cells[i, 5].Value, ExcelApp.Cells[i, 6].Value, ExcelApp.Cells[i, 7].Value, ExcelApp.Cells[i, 8].Value);
+                        ConsoleBox.Text = "Data importing finished succesful\n Now in DBPreView you can see data from" + filename;
+                    }
+                    else
+                    {
+                     break;
+                    }
+                }
+                
+                ExcelApp.Quit();
             }
-            ConsoleBox.Text = "Data importing finished succesful\n Now in DBPreView you can see data from" + filename;
+            else
+            {
+                ConsoleBox.Text = "You MUST to choose name and path of file to open it!";
+            }
+            
         }
     }
 }
