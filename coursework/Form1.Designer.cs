@@ -53,14 +53,9 @@
             this.label12 = new System.Windows.Forms.Label();
             this.ShowMinButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.DayUpDown = new System.Windows.Forms.NumericUpDown();
-            this.MonthUpDown = new System.Windows.Forms.NumericUpDown();
-            this.YearUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.PriceUpDown = new System.Windows.Forms.NumericUpDown();
             this.ShowAllButton = new System.Windows.Forms.Button();
+            this.СonsignmentUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.NamePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManufacturerPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PricePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,10 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DayUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MonthUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YearUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.СonsignmentUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // ImportButton
@@ -150,18 +143,18 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(9, 191);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Drugstore";
+            this.label6.Text = "Store";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(9, 237);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.Size = new System.Drawing.Size(68, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Exp. date";
+            this.label7.Text = "Consignment";
             // 
             // DBPreView
             // 
@@ -269,7 +262,7 @@
             this.ClearButton.Size = new System.Drawing.Size(68, 23);
             this.ClearButton.TabIndex = 10;
             this.ClearButton.Tag = "";
-            this.ClearButton.Text = "Clear Dead";
+            this.ClearButton.Text = "Clear Store";
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
@@ -311,89 +304,6 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // DayUpDown
-            // 
-            this.DayUpDown.Location = new System.Drawing.Point(77, 230);
-            this.DayUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.DayUpDown.Name = "DayUpDown";
-            this.DayUpDown.Size = new System.Drawing.Size(29, 20);
-            this.DayUpDown.TabIndex = 5;
-            this.DayUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // MonthUpDown
-            // 
-            this.MonthUpDown.Location = new System.Drawing.Point(112, 230);
-            this.MonthUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MonthUpDown.Name = "MonthUpDown";
-            this.MonthUpDown.Size = new System.Drawing.Size(35, 20);
-            this.MonthUpDown.TabIndex = 6;
-            this.MonthUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // YearUpDown
-            // 
-            this.YearUpDown.Location = new System.Drawing.Point(153, 230);
-            this.YearUpDown.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.YearUpDown.Minimum = new decimal(new int[] {
-            1919,
-            0,
-            0,
-            0});
-            this.YearUpDown.Name = "YearUpDown";
-            this.YearUpDown.Size = new System.Drawing.Size(43, 20);
-            this.YearUpDown.TabIndex = 7;
-            this.YearUpDown.Value = new decimal(new int[] {
-            1990,
-            0,
-            0,
-            0});
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(74, 214);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(26, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Day";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(110, 214);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(37, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Month";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(153, 214);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "Year";
-            // 
             // PriceUpDown
             // 
             this.PriceUpDown.DecimalPlaces = 1;
@@ -422,6 +332,13 @@
             this.ShowAllButton.Text = "Show All";
             this.ShowAllButton.UseVisualStyleBackColor = true;
             this.ShowAllButton.Click += new System.EventHandler(this.ShowAllButton_Click);
+            // 
+            // СonsignmentUpDown1
+            // 
+            this.СonsignmentUpDown1.Location = new System.Drawing.Point(77, 230);
+            this.СonsignmentUpDown1.Name = "СonsignmentUpDown1";
+            this.СonsignmentUpDown1.Size = new System.Drawing.Size(100, 20);
+            this.СonsignmentUpDown1.TabIndex = 4;
             // 
             // NamePrev
             // 
@@ -454,13 +371,13 @@
             // 
             // DrugstoreNumberPrev
             // 
-            this.DrugstoreNumberPrev.HeaderText = "Drugstore";
+            this.DrugstoreNumberPrev.HeaderText = "Store";
             this.DrugstoreNumberPrev.Name = "DrugstoreNumberPrev";
             this.DrugstoreNumberPrev.ReadOnly = true;
             // 
             // ExpirationDatePrev
             // 
-            this.ExpirationDatePrev.HeaderText = "Exp. date";
+            this.ExpirationDatePrev.HeaderText = "Consignment";
             this.ExpirationDatePrev.Name = "ExpirationDatePrev";
             this.ExpirationDatePrev.ReadOnly = true;
             this.ExpirationDatePrev.Width = 80;
@@ -471,9 +388,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 439);
             this.Controls.Add(this.ShowAllButton);
-            this.Controls.Add(this.YearUpDown);
-            this.Controls.Add(this.MonthUpDown);
-            this.Controls.Add(this.DayUpDown);
+            this.Controls.Add(this.СonsignmentUpDown1);
             this.Controls.Add(this.DrugUpDown);
             this.Controls.Add(this.AmountUpDown);
             this.Controls.Add(this.PriceUpDown);
@@ -483,9 +398,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -505,15 +417,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Drugstore DataBase Editor";
+            this.Text = "MechanicStore DataBase Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DayUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MonthUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YearUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.СonsignmentUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,18 +451,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button ShowMinButton;
         private System.Windows.Forms.Button SearchButton;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
         public System.Windows.Forms.TextBox NameBox;
         public System.Windows.Forms.TextBox ManufactBox;
         public System.Windows.Forms.NumericUpDown AmountUpDown;
         public System.Windows.Forms.NumericUpDown DrugUpDown;
-        public System.Windows.Forms.NumericUpDown DayUpDown;
-        public System.Windows.Forms.NumericUpDown MonthUpDown;
-        public System.Windows.Forms.NumericUpDown YearUpDown;
         public System.Windows.Forms.NumericUpDown PriceUpDown;
         private System.Windows.Forms.Button ShowAllButton;
+        public System.Windows.Forms.NumericUpDown СonsignmentUpDown1;
         private System.Windows.Forms.DataGridViewTextBoxColumn NamePrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerPrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn PricePrev;

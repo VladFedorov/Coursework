@@ -6,33 +6,34 @@ using System.Threading.Tasks;
 
 namespace coursework
 {
-    class Drugstore
+    class Mechstore
     {
         string name;
         string manufact;
         double price;
         int amount;
         int drugNumb;
-        int[] expDate = new int[3];
+        int consignment;
         byte error = 0;
 
         public string Name { get => name; set => name = value; }
         public string Manufact { get => manufact; set => manufact = value; }
         public double Price { get => price; set => price = value; }
         public int Amount { get => amount; set => amount = value; }
-        public int DrugNumb { get => drugNumb; set => drugNumb = value; }
-        public int[] ExpDate { get => expDate; set => expDate = value; }
+        public int StoreNumb { get => drugNumb; set => drugNumb = value; }
+        public int Consignment { get => consignment; set => consignment = value; }
         public byte Error { get => error; set => error = value; }
 
-        public Drugstore(string name, string manufact, double price, int amount, int drugNumb, int[] expDate)
+        public Mechstore(string name, string manufact, double price, int amount, int drugNumb, int consignment)
         {
             Name = name;
             Manufact = manufact;
             Price = price;
             Amount = amount;
-            DrugNumb = drugNumb;
-            ExpDate = expDate;
+            StoreNumb = drugNumb;
+            Consignment = consignment;
         }
+        //Checking
         public bool check()
         {
             if (Name == "")
@@ -43,26 +44,6 @@ namespace coursework
             if (Manufact == "")
             {
                 error = 2;
-                return false;
-            }
-            if (Price < 0)
-            {
-                error = 3;
-                return false;
-            }
-            if ( ExpDate[0] > 31)
-            {
-                error = 4;
-                return false;
-            }
-            if ( ExpDate[1] > 12)
-            {
-                error = 5;
-                return false;
-            }
-            if (ExpDate[2] <1919)
-            {
-                error = 6;
                 return false;
             }
             return true;

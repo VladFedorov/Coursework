@@ -21,12 +21,14 @@ namespace coursework
             returnString = "";
             InitializeComponent();
             ToolTip t = new ToolTip();
+            //Tooltips
             t.SetToolTip(SubmitButton, "Submit password");
             t.SetToolTip(ExitButton, "Just close this window");
         }
         
         public static string Show(string inputBoxText,string Password)
         {
+            //If user need password
             newInputBox = new InputBox();
             newInputBox.SearchUpDown1.Visible = false;
             newInputBox.SearchUpDown1.Enabled = false;
@@ -41,13 +43,13 @@ namespace coursework
 
         public static string Show(string inputBoxText, bool fraction)
         {
+            //If user need nomberic answer
             newInputBox = new InputBox();
             newInputBox.SearchBox.Visible = false;
             newInputBox.SearchBox.Enabled = false;
-            if (fraction == false)
+            if (fraction == true)
             {
-                newInputBox.SearchUpDown1.Increment = 1;
-                newInputBox.SearchUpDown1.DecimalPlaces = 0;
+                newInputBox.SearchUpDown1.Minimum = 5;
             }
             newInputBox.label1.Text = inputBoxText;
             newInputBox.ShowDialog();
@@ -56,6 +58,7 @@ namespace coursework
 
         private void SubmitButton_Click_1(object sender, EventArgs e)
         {
+            //If user do not enter a password
             if (SearchBox.Enabled && SearchBox.Text == "")
             {
                 SearchBox.BackColor = System.Drawing.Color.Red;
@@ -68,6 +71,7 @@ namespace coursework
                 Close();
             }
 
+            //If user use nomberic panel
             if (SearchBox.Enabled==false)
             {
                 returnString =Convert.ToString(SearchUpDown1.Value);
@@ -78,6 +82,7 @@ namespace coursework
         }
         private void ExitButton1_Click(object sender, EventArgs e)
         {
+            //Just exiting
             newInputBox.Dispose();
             Close();
         }
@@ -86,7 +91,11 @@ namespace coursework
 
 
 
+        //DO NOT LOOK!
+        
 
+
+       //Please...
 
         private void InitializeComponent()
         {
@@ -135,12 +144,6 @@ namespace coursework
             // 
             // SearchUpDown1
             // 
-            this.SearchUpDown1.DecimalPlaces = 1;
-            this.SearchUpDown1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.SearchUpDown1.Location = new System.Drawing.Point(23, 25);
             this.SearchUpDown1.Name = "SearchUpDown1";
             this.SearchUpDown1.Size = new System.Drawing.Size(185, 20);
@@ -167,5 +170,6 @@ namespace coursework
             this.PerformLayout();
 
         }
+
     }
 }
