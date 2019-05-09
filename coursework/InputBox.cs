@@ -165,11 +165,20 @@ namespace coursework
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InputBox";
+            this.Load += new System.EventHandler(this.InputBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SearchUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        private void InputBox_Load(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(SubmitButton, "Submit the password");
+            t.SetToolTip(ExitButton, "Exit without  entering pussword");
+            t.SetToolTip(SearchBox, "Enter here your password");
+            t.SetToolTip(SearchUpDown1, "Enter number");
+        }
     }
 }

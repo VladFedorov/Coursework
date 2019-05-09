@@ -34,9 +34,12 @@ namespace coursework
             t.SetToolTip(SearchButton, "Search product in MechStore");
             t.SetToolTip(ShowMinButton, "Show product with a minimum amount");
             t.SetToolTip(ClearButton, "Clear all product from store");
-
+            t.SetToolTip(ShowAllButton, "Show All products in DataBase");
+            t.SetToolTip(ConsoleBox,"Here you can see helpfull information");
+            t.SetToolTip(DBPreView, "Here you can see products");
+            
             //Console Greeting
-            ConsoleBox.Text = "WELCOME!\nThank you for using/testing my programm!";
+            ConsoleBox.Text = "WELCOME!\nThank you for using/testing my programm!\n(To see reference,just hold a mouse on different objects)";
 
             //Setting password
             Password = InputBox.Show("Please set security password",Password);

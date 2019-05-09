@@ -40,6 +40,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.DBPreView = new System.Windows.Forms.DataGridView();
+            this.NamePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PricePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DrugstoreNumberPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExpirationDatePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConsoleBox = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,12 +62,6 @@
             this.PriceUpDown = new System.Windows.Forms.NumericUpDown();
             this.ShowAllButton = new System.Windows.Forms.Button();
             this.СonsignmentUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.NamePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufacturerPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PricePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DrugstoreNumberPrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExpirationDatePrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).BeginInit();
@@ -175,6 +175,48 @@
             this.DBPreView.TabIndex = 15;
             this.DBPreView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DBPreView_CellClick);
             // 
+            // NamePrev
+            // 
+            this.NamePrev.HeaderText = "Name";
+            this.NamePrev.Name = "NamePrev";
+            this.NamePrev.ReadOnly = true;
+            this.NamePrev.Width = 97;
+            // 
+            // ManufacturerPrev
+            // 
+            this.ManufacturerPrev.HeaderText = "Manufacturer";
+            this.ManufacturerPrev.Name = "ManufacturerPrev";
+            this.ManufacturerPrev.ReadOnly = true;
+            this.ManufacturerPrev.Width = 90;
+            // 
+            // PricePrev
+            // 
+            dataGridViewCellStyle1.Format = "N2";
+            this.PricePrev.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PricePrev.HeaderText = "Price";
+            this.PricePrev.Name = "PricePrev";
+            this.PricePrev.ReadOnly = true;
+            this.PricePrev.Width = 70;
+            // 
+            // AmountPrev
+            // 
+            this.AmountPrev.HeaderText = "Amount";
+            this.AmountPrev.Name = "AmountPrev";
+            this.AmountPrev.ReadOnly = true;
+            // 
+            // DrugstoreNumberPrev
+            // 
+            this.DrugstoreNumberPrev.HeaderText = "Store";
+            this.DrugstoreNumberPrev.Name = "DrugstoreNumberPrev";
+            this.DrugstoreNumberPrev.ReadOnly = true;
+            // 
+            // ExpirationDatePrev
+            // 
+            this.ExpirationDatePrev.HeaderText = "Consignment";
+            this.ExpirationDatePrev.Name = "ExpirationDatePrev";
+            this.ExpirationDatePrev.ReadOnly = true;
+            this.ExpirationDatePrev.Width = 80;
+            // 
             // ConsoleBox
             // 
             this.ConsoleBox.Location = new System.Drawing.Point(11, 320);
@@ -225,6 +267,11 @@
             // AmountUpDown
             // 
             this.AmountUpDown.Location = new System.Drawing.Point(77, 145);
+            this.AmountUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.AmountUpDown.Name = "AmountUpDown";
             this.AmountUpDown.Size = new System.Drawing.Size(100, 20);
             this.AmountUpDown.TabIndex = 3;
@@ -313,6 +360,11 @@
             0,
             65536});
             this.PriceUpDown.Location = new System.Drawing.Point(77, 108);
+            this.PriceUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.PriceUpDown.Name = "PriceUpDown";
             this.PriceUpDown.Size = new System.Drawing.Size(100, 20);
             this.PriceUpDown.TabIndex = 2;
@@ -336,51 +388,14 @@
             // СonsignmentUpDown1
             // 
             this.СonsignmentUpDown1.Location = new System.Drawing.Point(77, 230);
+            this.СonsignmentUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.СonsignmentUpDown1.Name = "СonsignmentUpDown1";
             this.СonsignmentUpDown1.Size = new System.Drawing.Size(100, 20);
             this.СonsignmentUpDown1.TabIndex = 4;
-            // 
-            // NamePrev
-            // 
-            this.NamePrev.HeaderText = "Name";
-            this.NamePrev.Name = "NamePrev";
-            this.NamePrev.ReadOnly = true;
-            this.NamePrev.Width = 97;
-            // 
-            // ManufacturerPrev
-            // 
-            this.ManufacturerPrev.HeaderText = "Manufacturer";
-            this.ManufacturerPrev.Name = "ManufacturerPrev";
-            this.ManufacturerPrev.ReadOnly = true;
-            this.ManufacturerPrev.Width = 90;
-            // 
-            // PricePrev
-            // 
-            dataGridViewCellStyle1.Format = "N2";
-            this.PricePrev.DefaultCellStyle = dataGridViewCellStyle1;
-            this.PricePrev.HeaderText = "Price";
-            this.PricePrev.Name = "PricePrev";
-            this.PricePrev.ReadOnly = true;
-            this.PricePrev.Width = 70;
-            // 
-            // AmountPrev
-            // 
-            this.AmountPrev.HeaderText = "Amount";
-            this.AmountPrev.Name = "AmountPrev";
-            this.AmountPrev.ReadOnly = true;
-            // 
-            // DrugstoreNumberPrev
-            // 
-            this.DrugstoreNumberPrev.HeaderText = "Store";
-            this.DrugstoreNumberPrev.Name = "DrugstoreNumberPrev";
-            this.DrugstoreNumberPrev.ReadOnly = true;
-            // 
-            // ExpirationDatePrev
-            // 
-            this.ExpirationDatePrev.HeaderText = "Consignment";
-            this.ExpirationDatePrev.Name = "ExpirationDatePrev";
-            this.ExpirationDatePrev.ReadOnly = true;
-            this.ExpirationDatePrev.Width = 80;
             // 
             // MainForm
             // 
