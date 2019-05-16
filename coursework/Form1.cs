@@ -19,6 +19,7 @@ namespace coursework
         public MainForm()
         {
                 InitializeComponent();
+            
         }
 
         string Password;
@@ -43,8 +44,8 @@ namespace coursework
 
             //Setting password
             Password = InputBox.Show("Please set security password",Password);
-        }
 
+        }
         private void DBPreView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Asking for password
@@ -63,7 +64,7 @@ namespace coursework
                 }
             }
         }
-
+        
         private void AddButton_Click(object sender, EventArgs e)
         {
             //Adding
@@ -114,7 +115,17 @@ namespace coursework
         {
             //Searching
             bool min = false;
-            int searchnumb = Convert.ToInt32(InputBox.Show("Please input number of store",min));
+
+            int searchnumb = 0;
+            try
+            {
+                searchnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+            }
+            catch
+            {
+
+            }
+            if(searchnumb!= 0)
             for (int i = 0; i<DBPreView.Rows.Count; i++)
             {
                     if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) != searchnumb)
@@ -139,8 +150,18 @@ namespace coursework
         {
             
            bool min = false;
-           int clearnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+            int clearnumb = 0;
+            try
+            {
+                clearnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+            }
+            catch
+            {
+
+            }
+            
             //Deleting!
+            if(clearnumb != 0)
            for (int j = 0; j < DBPreView.Rows.Count; j++)
            {
              for (int i = 0; i < DBPreView.Rows.Count; i++)
@@ -171,7 +192,16 @@ namespace coursework
         {
             //Lets find!
             bool min = true;
-            int consignment = Convert.ToInt32(InputBox.Show("Please input MINIMAL consignment", min));
+            int consignment = 0;
+            try
+            {
+                consignment = Convert.ToInt32(InputBox.Show("Please input MINIMAL consignment", min));
+            }
+            catch
+            {
+
+            }
+            if(consignment !=0 )
             for (int i = 0; i < DBPreView.RowCount; i++)
             {
                 double nowprice = Convert.ToDouble(DBPreView.Rows[i].Cells[5].Value.ToString());
@@ -182,7 +212,7 @@ namespace coursework
                 ConsoleBox.Text = "Now you can see ONLY objects which amount bigger or equal " + consignment + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
             }
         }
-
+        
         private void ExportButton_Click(object sender, EventArgs e)
         { 
             //Alot of strange symbols
@@ -283,6 +313,12 @@ namespace coursework
                 //If the user changed the decision
                 ConsoleBox.Text = "You MUST to choose name and path of file to open it!";
             }
+        }
+
+        private void MainForm_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            //WIP
+            Help.ShowHelp(this, "help.chm");
         }
     }
 }

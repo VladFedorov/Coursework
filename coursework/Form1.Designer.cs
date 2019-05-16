@@ -82,6 +82,7 @@
             // NameBox
             // 
             this.NameBox.Location = new System.Drawing.Point(77, 34);
+            this.NameBox.MaxLength = 300;
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(100, 20);
             this.NameBox.TabIndex = 0;
@@ -434,6 +435,7 @@
             this.Name = "MainForm";
             this.Text = "MechanicStore DataBase Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MainForm_HelpRequested);
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).EndInit();
