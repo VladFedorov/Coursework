@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Data.OleDb;
+using System.Diagnostics;
 
 namespace coursework
 {
-
     public partial class MainForm : System.Windows.Forms.Form
     {
 
@@ -117,23 +111,25 @@ namespace coursework
             bool min = false;
 
             int searchnumb = 0;
-            try
-            {
-                searchnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
-            }
-            catch
-            {
+            searchnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+            if (searchnumb != 0)
+                try
+                {
 
-            }
-            if(searchnumb!= 0)
-            for (int i = 0; i<DBPreView.Rows.Count; i++)
-            {
-                    if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) != searchnumb)
+                    for (int i = 0; i < DBPreView.Rows.Count; i++)
                     {
-                        DBPreView.Rows[i].Visible = false;
+                            if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) != searchnumb)
+                            {
+                                DBPreView.Rows[i].Visible = false;
+                            }
+                            ConsoleBox.Text = "Now you can see products ONLY in current store!" + '(' + searchnumb + ')' + "\nToo see ALL products press " + '"' + "Show All" + '"' + "button.";
                     }
-                    ConsoleBox.Text = "Now you can see products ONLY in current store!" + '(' + searchnumb + ')' + "\nToo see ALL products press " + '"' + "Show All" + '"' + "button.";
-            }
+
+                }
+                catch
+                {
+                    ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits)";
+                }
         }
 
         private void ShowAllButton_Click(object sender, EventArgs e)
@@ -151,41 +147,25 @@ namespace coursework
             
            bool min = false;
             int clearnumb = 0;
+            clearnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+            //Deleting!
             try
             {
-                clearnumb = Convert.ToInt32(InputBox.Show("Please input number of store", min));
+                for (int i = DBPreView.Rows.Count-1; i >= 0; i--)
+                {
+                  if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) == clearnumb)
+                  {
+                    DBPreView.Rows.RemoveAt(i);
+                  }
+
+                }
+                DBPreView.Refresh();
+                ConsoleBox.Text = "All products from store #" + clearnumb + " has been deleted!";
             }
             catch
             {
-
+                ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits)";
             }
-            
-            //Deleting!
-            if(clearnumb != 0)
-           for (int j = 0; j < DBPreView.Rows.Count; j++)
-           {
-             for (int i = 0; i < DBPreView.Rows.Count; i++)
-             {
-               if (Convert.ToInt32(DBPreView.Rows[i].Cells[4].Value) == clearnumb)
-               {
-                 DBPreView.Rows.RemoveAt(i);
-               }
-             }
-           }
-
-           // Just in case :D
-           DBPreView.Refresh();
-           int tmp = DBPreView.RowCount - 1;
-
-           if (Convert.ToInt32(DBPreView.Rows[0].Cells[5].Value.ToString()) == clearnumb)
-            DBPreView.Rows.RemoveAt(0);
-
-           tmp = DBPreView.RowCount - 1;
-           if ((Convert.ToInt32(DBPreView.Rows[tmp].Cells[5].Value.ToString()) == clearnumb))
-            DBPreView.Rows.RemoveAt(tmp);
-
-           DBPreView.Refresh();
-           ConsoleBox.Text = "All products from store #" + clearnumb + " has been deleted!";
         }
 
         private void ShowMinButton_Click(object sender, EventArgs e)
@@ -193,24 +173,27 @@ namespace coursework
             //Lets find!
             bool min = true;
             int consignment = 0;
-            try
-            {
-                consignment = Convert.ToInt32(InputBox.Show("Please input MINIMAL consignment", min));
-            }
-            catch
-            {
-
-            }
-            if(consignment !=0 )
-            for (int i = 0; i < DBPreView.RowCount; i++)
-            {
-                double nowprice = Convert.ToDouble(DBPreView.Rows[i].Cells[5].Value.ToString());
-                if (nowprice < consignment)
+            consignment = Convert.ToInt32(InputBox.Show("Please input MINIMAL consignment", min));
+            if (consignment != 0)
+                try
                 {
-                    DBPreView.Rows[i].Visible = false;
+
+
+                    for (int i = 0; i < DBPreView.RowCount; i++)
+                    {
+                            double nowprice = Convert.ToDouble(DBPreView.Rows[i].Cells[5].Value.ToString());
+
+                            if (nowprice < consignment)
+                            {
+                                DBPreView.Rows[i].Visible = false;
+                            }
+                            ConsoleBox.Text = "Now you can see ONLY objects which amount bigger or equal " + consignment + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";             
+                    }
                 }
-                ConsoleBox.Text = "Now you can see ONLY objects which amount bigger or equal " + consignment + "\nToo see ALL objects press " + '"' + "Show All" + '"' + "button.";
-            }
+                catch
+                {
+                    ConsoleBox.Text = "It seems we have error.\nPlease recheck consignment collumn\n(All cells in this column must contain digits)";
+                }
         }
         
         private void ExportButton_Click(object sender, EventArgs e)
@@ -263,9 +246,10 @@ namespace coursework
             //Alot of strange symbols PART2
 
             //Lets remove trash! 
-            for (int i = 0; i < DBPreView.Rows.Count; i++)
+            for (int i = (DBPreView.Rows.Count-1); i >= 0; i--)
             {
                 DBPreView.Rows.RemoveAt(i);
+                DBPreView.Refresh();
             }
             OpenFileDialog opf = new OpenFileDialog();
             opf.Filter = "Excel (*.XLSX)|*.XLSX | OLD_Excel (*.XLS)|*.XLS ";
@@ -294,7 +278,7 @@ namespace coursework
                            break;
                         }
                  }
-                 string str = ExcelApp.Cells[1, 7].Value;
+                 string str = Convert.ToString(ExcelApp.Cells[1, 7].Value);
                  char[] s = str.ToArray();
                  str = "";
                for (int f = s.Length - 1; f >= 0; f--)
@@ -318,7 +302,7 @@ namespace coursework
         private void MainForm_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             //WIP
-            Help.ShowHelp(this, "help.chm");
+            Process.Start(@"C:\Users\VUser\source\repos\Coursework\help\index.html");
         }
     }
 }

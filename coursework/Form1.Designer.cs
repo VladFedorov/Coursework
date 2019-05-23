@@ -483,4 +483,3 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ExpirationDatePrev;
     }
 }
-
