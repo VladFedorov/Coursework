@@ -62,6 +62,7 @@
             this.PriceUpDown = new System.Windows.Forms.NumericUpDown();
             this.ShowAllButton = new System.Windows.Forms.Button();
             this.СonsignmentUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.RecoveryButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).BeginInit();
@@ -398,11 +399,22 @@
             this.СonsignmentUpDown1.Size = new System.Drawing.Size(100, 20);
             this.СonsignmentUpDown1.TabIndex = 4;
             // 
+            // RecoveryButton
+            // 
+            this.RecoveryButton.Location = new System.Drawing.Point(708, 5);
+            this.RecoveryButton.Name = "RecoveryButton";
+            this.RecoveryButton.Size = new System.Drawing.Size(75, 23);
+            this.RecoveryButton.TabIndex = 17;
+            this.RecoveryButton.Text = "Pass Recov";
+            this.RecoveryButton.UseVisualStyleBackColor = true;
+            this.RecoveryButton.Click += new System.EventHandler(this.RecoveryButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 439);
+            this.Controls.Add(this.RecoveryButton);
             this.Controls.Add(this.ShowAllButton);
             this.Controls.Add(this.СonsignmentUpDown1);
             this.Controls.Add(this.DrugUpDown);
@@ -481,5 +493,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountPrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn DrugstoreNumberPrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExpirationDatePrev;
+        private System.Windows.Forms.Button RecoveryButton;
     }
 }

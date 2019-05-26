@@ -59,7 +59,7 @@ namespace coursework
         private void SubmitButton_Click_1(object sender, EventArgs e)
         {
             //If user do not enter a password
-            if (SearchBox.Enabled && SearchBox.Text == "")
+            if (SearchBox.Enabled && SearchBox.Text == "" || SearchBox.Enabled && SearchBox.Text.Length <4)
             {
                 SearchBox.BackColor = System.Drawing.Color.Red;
                 SearchBox.ForeColor = System.Drawing.Color.White;

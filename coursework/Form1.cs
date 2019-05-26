@@ -1,14 +1,44 @@
 ﻿using System;
+using System.Net.Mail;
 using System.Data;
-using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
+using System.Text;
 
 namespace coursework
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        string DefPass(System.Windows.Forms.RichTextBox ConsoleBox, string Password)
+        {
+            ConsoleBox.Text += "\n Error with Password importing. Password set to " + Password;
+            return "toor";
+        }
+
+        string DefWord(System.Windows.Forms.RichTextBox ConsoleBox, string Password)
+        {
+            ConsoleBox.Text += "\n Error with SecretWord importing. Password set to " + Password;
+            return "toor";
+        }
+
+        void PasswordReset(string email, string Password)
+        {
+            MailAddress from = new MailAddress("nxnxngh@gmail.com","MechStoreEditor");
+            MailAddress to = new MailAddress(email);
+            MailMessage message = new MailMessage(from,to);
+            message.Subject = "Your password";
+            message.Body = "<h2>"+" Dear User!"+"</h2 >" +
+            "<br>"+" Your Password to MechStoreEditor" + "<h2>" + Password + "</h2>" +
+            "<br>"+" Best wishes," +
+            "<br>"+" Vlad Fedorov";
+            message.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("nxnxngh@gmail.com", "********************");
+            smtp.EnableSsl = true;
+            smtp.Send(message);
+        }
 
         public MainForm()
         {
@@ -18,6 +48,8 @@ namespace coursework
 
         string Password;
         bool SuperUser;
+        string email;
+        string secretword;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,6 +70,9 @@ namespace coursework
 
             //Setting password
             Password = InputBox.Show("Please set security password",Password);
+
+            //Setting Secret Word
+            secretword = InputBox.Show("Please set secret word", secretword);
 
         }
         private void DBPreView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -205,21 +240,21 @@ namespace coursework
             excelapp.Visible = false;
 
             //Preparing to export user password
+            var bytes = Encoding.UTF8.GetBytes(Password);
+            string passwd = Convert.ToBase64String(bytes);
             for (int i = 0; i < DBPreView.RowCount; i++)
             {
                 for (int j = 0; j < DBPreView.ColumnCount; j++)
                 {
-                    char[] s = Password.ToArray();
-                    string str = "";
-                    for (int f = s.Length - 1; f >= 0; f--)
-                    {
-                        str += s[f];
-                    }
                     worksheet.Rows[i+1].Columns[j+1] = DBPreView.Rows[i].Cells[j].Value;
-                    worksheet.Rows[1].Columns[7] = str;
                 }
             }
 
+            var bytesecret = Encoding.UTF8.GetBytes(secretword);
+            string secword = Convert.ToBase64String(bytesecret);
+            worksheet.Rows[1].Columns[8] = secword;
+
+            worksheet.Rows[1].Columns[7] = passwd;
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = "Excel (*.xlsx)|*.xlsx | Excel (*.xls)|*.xls";
             
@@ -278,19 +313,47 @@ namespace coursework
                            break;
                         }
                  }
-                 string str = Convert.ToString(ExcelApp.Cells[1, 7].Value);
-                 char[] s = str.ToArray();
-                 str = "";
-               for (int f = s.Length - 1; f >= 0; f--)
-               {
-                  str += s[f];
-               }
-
-               //Old Password
-               Password = str;
-               SuperUser = false;
-               ConsoleBox.Text = "Data importing finished succesful\n Now in DBPreView you can see data from " + filename;
-               ExcelApp.Quit();
+                ConsoleBox.Text = "Data importing finished succesful\n Now in DBPreView you can see data from " + filename;
+                //Old Password
+                string passwd = Convert.ToString(ExcelApp.Cells[1, 7].Value);
+                if (passwd != "")
+                {
+                    try
+                    {
+                        var bytes = Convert.FromBase64String(passwd);
+                        Password = Encoding.UTF8.GetString(bytes);
+                        SuperUser = false;
+                        ConsoleBox.Text += "\nPassword has been succesfully imported";
+                    }
+                    catch
+                    {
+                        DefPass(ConsoleBox, Password);
+                    }
+                } 
+                else
+                {
+                    Password = DefPass(ConsoleBox, Password);
+                }
+                //Old SecretWord
+                string secword = Convert.ToString(ExcelApp.Cells[1, 8].Value);
+                if (secword != "")
+                {
+                    try
+                    {
+                        var bytesword = Convert.FromBase64String(secword);
+                        secretword = Encoding.UTF8.GetString(bytesword);
+                        ConsoleBox.Text += "\nSecretWord has been succesfully imported";
+                    }
+                    catch
+                    {
+                        DefWord(ConsoleBox, secretword);
+                    }
+                }
+                else
+                {
+                    secretword = DefPass(ConsoleBox, secretword);
+                }
+                ExcelApp.Quit();
             }
             else
             {
@@ -301,8 +364,29 @@ namespace coursework
 
         private void MainForm_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            //WIP
+            //HELP
             Process.Start(@"C:\Users\VUser\source\repos\Coursework\help\index.html");
+        }
+
+        private void RecoveryButton_Click(object sender, EventArgs e)
+        {
+            //E-MAIL password recovery
+            string secword = secretword;
+            if (secretword == InputBox.Show("Please set secretword", secword))
+            {
+                email = InputBox.Show("Please set e-mail adress", email);
+                try
+                { 
+                    PasswordReset(email, Password);
+                    ConsoleBox.Text = "Please check your e-mail";
+                }
+                catch
+                {
+                    ConsoleBox.Text = "Error!";
+                }
+            }
+            else
+                ConsoleBox.Text = "Secret word is invalid";
         }
     }
 }
