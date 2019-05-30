@@ -25,19 +25,31 @@ namespace coursework
 
         void PasswordReset(string email, string Password)
         {
-            MailAddress from = new MailAddress("nxnxngh@gmail.com","MechStoreEditor");
+            //Support e-mail
+            string elog= "bnhueG5naEBnbWFpbC5jb20=";
+            string epass= "WW91cmUtbWFpbHBhc3N3b3Jk";
+            
+            //Decoding
+            var bytes = Convert.FromBase64String(elog);
+            elog = Encoding.UTF8.GetString(bytes);
+            bytes = Convert.FromBase64String(epass);
+            epass = Encoding.UTF8.GetString(bytes);
+
+            //Sending
+            MailAddress from = new MailAddress(elog,"MechStoreEditor");
             MailAddress to = new MailAddress(email);
             MailMessage message = new MailMessage(from,to);
             message.Subject = "Your password";
-            message.Body = "<h2>"+" Dear User!"+"</h2 >" +
+            message.Body = "<h3>"+" Dear User!"+"</h3 >" +
             "<br>"+" Your Password to MechStoreEditor" + "<h2>" + Password + "</h2>" +
             "<br>"+" Best wishes," +
             "<br>"+" Vlad Fedorov";
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new NetworkCredential("nxnxngh@gmail.com", "********************");
+            smtp.Credentials = new NetworkCredential(elog, epass);
             smtp.EnableSsl = true;
             smtp.Send(message);
+            ConsoleBox.Text = "Please check your e-mail";
         }
 
         public MainForm()
@@ -163,7 +175,7 @@ namespace coursework
                 }
                 catch
                 {
-                    ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits)";
+                    ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits)  and click this button again!";
                 }
         }
 
@@ -199,7 +211,7 @@ namespace coursework
             }
             catch
             {
-                ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits)";
+                ConsoleBox.Text = "It seems we have error.\nPlease recheck store_number collumn.\n(This culmn must have only digits) and click this button again!";
             }
         }
 
@@ -227,7 +239,7 @@ namespace coursework
                 }
                 catch
                 {
-                    ConsoleBox.Text = "It seems we have error.\nPlease recheck consignment collumn\n(All cells in this column must contain digits)";
+                    ConsoleBox.Text = "It seems we have error.\nPlease recheck consignment collumn\n(All cells in this column must contain digits) and click this button again!";
                 }
         }
         
@@ -378,7 +390,6 @@ namespace coursework
                 try
                 { 
                     PasswordReset(email, Password);
-                    ConsoleBox.Text = "Please check your e-mail";
                 }
                 catch
                 {

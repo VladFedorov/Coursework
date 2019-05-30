@@ -395,9 +395,19 @@
             0,
             0,
             0});
+            this.СonsignmentUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.СonsignmentUpDown1.Name = "СonsignmentUpDown1";
             this.СonsignmentUpDown1.Size = new System.Drawing.Size(100, 20);
             this.СonsignmentUpDown1.TabIndex = 4;
+            this.СonsignmentUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // RecoveryButton
             // 
