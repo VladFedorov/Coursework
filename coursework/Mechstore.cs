@@ -12,7 +12,7 @@ namespace coursework
         string manufact;
         double price;
         int amount;
-        int drugNumb;
+        int storeNumb;
         int consignment;
         byte error = 0;
 
@@ -20,7 +20,7 @@ namespace coursework
         public string Manufact { get => manufact; set => manufact = value; }
         public double Price { get => price; set => price = value; }
         public int Amount { get => amount; set => amount = value; }
-        public int StoreNumb { get => drugNumb; set => drugNumb = value; }
+        public int StoreNumb { get => storeNumb; set => storeNumb = value; }
         public int Consignment { get => consignment; set => consignment = value; }
         public byte Error { get => error; set => error = value; }
 

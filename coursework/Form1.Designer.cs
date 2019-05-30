@@ -64,6 +64,7 @@
             this.ShowAllButton = new System.Windows.Forms.Button();
             this.СonsignmentUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.RecoveryButton = new System.Windows.Forms.Button();
+            this.ResetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DBPreView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmountUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DrugUpDown)).BeginInit();
@@ -420,11 +421,22 @@
             this.RecoveryButton.UseVisualStyleBackColor = true;
             this.RecoveryButton.Click += new System.EventHandler(this.RecoveryButton_Click);
             // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(627, 5);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetButton.TabIndex = 17;
+            this.ResetButton.Text = "Pass Reset";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 439);
+            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.RecoveryButton);
             this.Controls.Add(this.ShowAllButton);
             this.Controls.Add(this.СonsignmentUpDown1);
@@ -506,5 +518,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DrugstoreNumberPrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExpirationDatePrev;
         private System.Windows.Forms.Button RecoveryButton;
+        private System.Windows.Forms.Button ResetButton;
     }
 }

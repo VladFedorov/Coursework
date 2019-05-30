@@ -23,7 +23,7 @@ namespace coursework
             return "toor";
         }
 
-        void PasswordReset(string email, string Password)
+        void PasswordAsk(string email, string Password)
         {
             //Support e-mail
             string elog= "bnhueG5naEBnbWFpbC5jb20=";
@@ -299,7 +299,7 @@ namespace coursework
                 DBPreView.Refresh();
             }
             OpenFileDialog opf = new OpenFileDialog();
-            opf.Filter = "Excel (*.XLSX)|*.XLSX | OLD_Excel (*.XLS)|*.XLS ";
+            opf.Filter = "Excel (*.xlsx)|*.xlsx | OLD_Excel (*.xls)|*.xls ";
 
             if (opf.ShowDialog() == DialogResult.OK)
             {
@@ -389,12 +389,24 @@ namespace coursework
                 email = InputBox.Show("Please set e-mail adress", email);
                 try
                 { 
-                    PasswordReset(email, Password);
+                    PasswordAsk(email, Password);
                 }
                 catch
                 {
                     ConsoleBox.Text = "Error!";
                 }
+            }
+            else
+                ConsoleBox.Text = "Secret word is invalid";
+        }
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            //E-MAIL password recovery
+            string secword = secretword;
+            if (secretword == InputBox.Show("Please set secretword", secword))
+            {
+                Password = "";
+                Password = InputBox.Show("Please input new Password", Password);
             }
             else
                 ConsoleBox.Text = "Secret word is invalid";
